@@ -1,0 +1,114 @@
+#Module 4: Mini-Project Library system
+
+import re #regular expression import
+
+class Book: #book class
+    def __init__(self, title, author, isbn, genre, publication_date, availability):
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+        self.genre = genre
+        self.publication_date = publication_date
+        self.availability = availability
+
+    def __str__(self): #string book info
+        return f"Title: {self.title}, Author: {self.author}, Genre: {self.genre}, Availability: {self.availability}"
+
+class User: # user class
+    def __init__(self, name, library_id, borrowed_books=[]):
+        self.name = name
+        self.library_id = library_id
+        self.borrowed_books = borrowed_books
+
+    def __str__(self):
+        return f"Name: {self.name}, Library ID: {self.library_id}, Borrowed Books: {', '.join(self.borrowed_books)}"
+
+class Author: #author 
+    def __init__(self, name, biography=""):
+        self.name = name
+        self.biography = biography
+
+    def __str__(self):
+        return f"Name: {self.name}, Biography: {self.biography}"
+
+class Library: #library
+    def __init__(self):
+        self.books = []
+        self.users = []
+        self.authors = []
+
+    def add_book(self, book):
+        self.books.append(book)
+
+    def add_user(self, user):
+        self.users.append(user)
+
+    def add_author(self, author):
+        self.authors.append(author)
+
+    def search_book(self, title):
+        for book in self.books:
+            if re.search(title, book.title, re.IGNORECASE):
+                print(book)
+
+    def display_all_books(self):
+        for book in self.books:
+            print(book)
+
+    def display_all_users(self):
+        for user in self.users:
+            print(user)
+
+    def display_all_authors(self):
+        for author in self.authors:
+            print(author)
+
+def main():
+    library = Library()
+
+    print("Welcome to the Library Management System!\n")
+
+    while True:
+        print("Main Menu:")
+        print("1. Book Operations")
+        print("2. User Operations")
+        print("3. Author Operations")
+        print("4. Quit")
+
+        choice = input("\nEnter your choice: ")
+
+        if choice == "1":
+            print("\nBook Operations:")
+            print("1. Add a new book")
+            print("2. Borrow a book")
+            print("3. Return a book")
+            print("4. Search for a book")
+            print("5. Display all books")
+
+            book_choice = input("\nEnter your choice: ")
+
+        elif choice == "2":
+            print("\nUser Operations:")
+            print("1. Add a new user")
+            print("2. View user details")
+            print("3. Display all users")
+
+            user_choice = input("\nEnter your choice: ")
+
+        elif choice == "3":
+            print("\nAuthor Operations:")
+            print("1. Add a new author")
+            print("2. View author details")
+            print("3. Display all authors")
+
+            author_choice = input("\nEnter your choice: ")
+
+        elif choice == "4":
+            print("Exiting...")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
